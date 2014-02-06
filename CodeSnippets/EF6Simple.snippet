@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>HereIsOneWePreparedEarlier</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[public class Blog
+    {
+        [Key]
+        public int Key { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+
+        public virtual List<Post> Posts { get; set; }
+    }
+
+    public class Post
+    {
+        [Key]
+        public int Key { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+
+        public int BlogKey { get; set; }
+        public virtual Blog Blog { get; set; }
+        public List<Comment> Comments { get; set; }
+
+    }
+
+    public class Comment
+    {
+        [Key]
+        public int Key { get; set; }
+        public string Author { get; set; }
+        public string AuthorUrl { get; set; }
+        public string Content { get; set; }
+
+        public int PostKey { get; set; }
+        public Post Post { get; set; }
+        
+        public int StatusKey { get; set; }
+        public Status Status { get; set; }
+    }
+
+    public class Status
+    {
+        [Key]
+        public int Key { get; set; }
+        public string Name { get; set; }
+        public bool DisplayToPublic { get; set; }
+    }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>AddADbSetForEachTypeInMyModel</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>DoSomeDatabaseStuff</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[static void CreateAndPrintBlogs()
+        {
+            using (var db = new BloggingContext())
+            {
+                db.Blogs.Add(new Blog { Name = "Yet Another Blog #" + (db.Blogs.Count() + 1) });
+                db.SaveChanges();
+
+                var blogs = (from b in db.Blogs
+                                  orderby b.Name
+                                  select b).ToList();
+
+                Console.WriteLine("Blogs:");
+                foreach (var item in blogs)
+                {
+                    Console.WriteLine(" - " + item.Name);
+                }
+            }
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>KeyConvention</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[modelBuilder
+                .Properties()
+                .Where(p => p.Name == "Key")
+                .Configure(p => p.IsKey());]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>GetColumnName</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[/// <summary>
+        /// Combines type and property name using underscore naming
+        /// e.g.  Comment.Key => comment_key
+        ///       Comment.AuthorUrl => comment_author_url
+        /// </summary>
+        private static string GetColumnName(PropertyInfo property)
+        {
+            var result = property.DeclaringType.Name + "_";
+
+            result += Regex.Replace(
+                property.Name,
+                ".[A-Z]",
+                m => m.Value[0] + "_" + m.Value[1]);
+
+            return result.ToLower();
+        }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>BlogCreationLog</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[CreateTable(
+                "dbo.BlogCreationLog",
+                c => new
+                {
+                    blog_key = c.Int(nullable: false),
+                    created_by = c.String(),
+                    created_date = c.DateTime(nullable: false)
+                })
+                .PrimaryKey(t => t.blog_key);
+                
+            /*
+                      INSERT INTO [dbo].[BlogCreationLog] (blog_key, created_by, created_date) 
+                      VALUES (@blog_key, SYSTEM_USER, GETDATE())
+            */]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>BlogCreationLog</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[CreateTable(
+                "dbo.BlogCreationLog",
+                c => new
+                {
+                    blog_key = c.Int(nullable: false),
+                    created_by = c.String(),
+                    created_date = c.DateTime(nullable: false)
+                })
+                .PrimaryKey(t => t.blog_key);
+                
+            /*
+                      INSERT INTO [dbo].[BlogCreationLog] (blog_key, created_by, created_date) 
+                      VALUES (@blog_key, SYSTEM_USER, GETDATE())
+            */]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>MoreBetterEnglishPluralizationService</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[public class MoreBetterEnglishPluralizationService : IPluralizationService
+    {
+        private EnglishPluralizationService _service = new EnglishPluralizationService();
+
+        public string Pluralize(string word)
+        {
+            if (word.EndsWith("Status"))
+            {
+                return word + "es";
+            }
+
+            return _service.Pluralize(word);
+        }
+
+        public string Singularize(string word)
+        {
+            return _service.Singularize(word);
+        }
+    }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Shortcut>NLogInterceptor</Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp">
+        <![CDATA[public class NLogInterceptor : IDbCommandInterceptor
+    {
+        private static NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+
+        public void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
+        {
+        }
+
+        public void NonQueryExecuted(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
+        {
+            LogCommandComplete(command, interceptionContext);
+        }
+
+        public void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
+        {
+        }
+
+        public void ReaderExecuted(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
+        {
+            LogCommandComplete(command, interceptionContext);
+        }
+
+        public void ScalarExecuting(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
+        {
+        }
+
+        public void ScalarExecuted(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
+        {
+            LogCommandComplete(command, interceptionContext);
+        }
+
+        private void LogCommandComplete<TResult>(DbCommand command, DbCommandInterceptionContext<TResult> interceptionContext)
+        {
+            if (interceptionContext.Exception == null)
+            {
+                logger.Trace("Command completed with result {0}", interceptionContext.Result);
+                logger.Trace(command.CommandText);
+            }
+            else
+            {
+                logger.WarnException("Command failed", interceptionContext.Exception);
+                logger.Trace(command.CommandText);
+            }
+        }
+    }]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
