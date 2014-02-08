@@ -1,4 +1,4 @@
 Demo-EF6Simple
 ==============
 
-Source code for a level 100-200 talk/demo of EF6
+See [the Wiki](https://github.com/rowanmiller/Demo-EF6Simple/wiki) for details on the contents of this repo and how to setup and run the demos.
