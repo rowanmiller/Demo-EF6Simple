@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25A1894E-9989-4084-B24F-B53BE185474C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CompletedDemo</RootNamespace>
+    <AssemblyName>CompletedDemo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="QuoteOfTheDay">
+      <HintPath>..\packages\QuoteOfTheDay.1.0.0.0\lib\net45\QuoteOfTheDay.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BloggingContext.cs" />
+    <Compile Include="Migrations\201402111817179_InitialCreate.cs" />
+    <Compile Include="Migrations\201402111817179_InitialCreate.Designer.cs">
+      <DependentUpon>201402111817179_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111818009_BlogRating.cs" />
+    <Compile Include="Migrations\201402111818009_BlogRating.Designer.cs">
+      <DependentUpon>201402111818009_BlogRating.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111819250_ColumnNaming.cs" />
+    <Compile Include="Migrations\201402111819250_ColumnNaming.Designer.cs">
+      <DependentUpon>201402111819250_ColumnNaming.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111819501_ShortStrings.cs" />
+    <Compile Include="Migrations\201402111819501_ShortStrings.Designer.cs">
+      <DependentUpon>201402111819501_ShortStrings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111820496_BlogSPROCs.cs" />
+    <Compile Include="Migrations\201402111820496_BlogSPROCs.Designer.cs">
+      <DependentUpon>201402111820496_BlogSPROCs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111821286_TweakSPROC.cs" />
+    <Compile Include="Migrations\201402111821286_TweakSPROC.Designer.cs">
+      <DependentUpon>201402111821286_TweakSPROC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111823093_AllSPROCs.cs" />
+    <Compile Include="Migrations\201402111823093_AllSPROCs.Designer.cs">
+      <DependentUpon>201402111823093_AllSPROCs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201402111835581_BetterPlurals.cs" />
+    <Compile Include="Migrations\201402111835581_BetterPlurals.Designer.cs">
+      <DependentUpon>201402111835581_BetterPlurals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="MoreBetterEnglishPluralizationService.cs" />
+    <Compile Include="MyConfig.cs" />
+    <Compile Include="NLogInterceptor.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201402111817179_InitialCreate.resx">
+      <DependentUpon>201402111817179_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111818009_BlogRating.resx">
+      <DependentUpon>201402111818009_BlogRating.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111819250_ColumnNaming.resx">
+      <DependentUpon>201402111819250_ColumnNaming.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111819501_ShortStrings.resx">
+      <DependentUpon>201402111819501_ShortStrings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111820496_BlogSPROCs.resx">
+      <DependentUpon>201402111820496_BlogSPROCs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111821286_TweakSPROC.resx">
+      <DependentUpon>201402111821286_TweakSPROC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111823093_AllSPROCs.resx">
+      <DependentUpon>201402111823093_AllSPROCs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201402111835581_BetterPlurals.resx">
+      <DependentUpon>201402111835581_BetterPlurals.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
