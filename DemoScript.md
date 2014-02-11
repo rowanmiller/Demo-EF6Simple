@@ -2,6 +2,7 @@ The demo is broken up into a series of sections that showcase a specific feature
 
 ### One Time Setup
 * You'll need a machine with Visual Studio 2013 installed
+* Install [ZoomIt](http://technet.microsoft.com/en-us/sysinternals/bb897434.aspx) and get familiar with how to use it - it's a great tool for making you demos look professional.
 * Clone this Git repo to your local machine
 * Register the code snippets in Visual Studio
  * Open VS -> Tools -> Code Snippets Manager...
@@ -18,7 +19,7 @@ The demo is broken up into a series of sections that showcase a specific feature
 ### Every Time Setup
 * Run Visual Studio as an administrator (running as an administrator seems to minimize occurrences of the issue mentioned in the next point)
 * Run **Get-ExecutionPolicy** in Package Manager Console (PMC) and ensure it returns **RemoteSigned**
- * Occasionally PMC sets the **Restricted** execution policy and won't allow running install scripts from the NuGet packages. It's really hard to recover from… **don't skip this step!**
+ * Occasionally PMC sets the **Restricted** execution policy and won't allow running install scripts from the NuGet packages. It's really hard to recover fromï¿½ **don't skip this step!**
 * Connect to **(localdb)\v11.0** in SQL Server Object Explorer (if you have a SKU of Visual Studio which includes it). If you have a version of VS without it, you should grab [SQL Server Management Studio](http://www.microsoft.com/en-us/download/details.aspx?id=29062) instead.
   * I recommend dropping all databases from LocalDb before the demo - it's just less noise for folks to process.
 
