@@ -3,6 +3,8 @@ Demo-EF6Simple
 
 This repository provides a demo script, code base, and slide deck to deliver a level 100-200 talk about EF6. You should feel free to use this content as-is, or modify it as you wish, to deliver a talk about EF6 to your user group, company, or anyone else who will listen to you.
 
+This talk is almost identical to the [Entity Framework 6: Database Access Anywhere, Easily](http://channel9.msdn.com/Events/TechEd/NorthAmerica/2013/DEV-B335) session I presented at TechEd North America in 2013. If you want to see how the slides/demos/etc. fit together then you can review that talk.
+
 ## The Stuff You Need
 *  [**The slide deck**](https://github.com/rowanmiller/Demo-EF6Simple/blob/master/SlideDeck.pptx?raw=true) covers some intro material on EF6, an intro to each feature in the demo, and some additional resources to share with folks at the end. Feel free to modify the deck as you see fit.
 * [**The demo script**](https://github.com/rowanmiller/Demo-EF6Simple/blob/master/DemoScript.md) provides a detailed set of instructions to setup your machine and perform all the demos. More details about how to use the following resources is included in the demo script:
